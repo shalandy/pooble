@@ -1,6 +1,6 @@
 app.controller('HomeController', function($scope, $http) {
 	function getRecentGolinks(){
-		 $http.get(ROOT_URL + '/api/recent_golinks?&token='+getToken()).
+		 $http.get(tokenizedURL(ROOT_URL + '/api/recent_golinks')).
     	success(function(data, status, headers, config){
     		$scope.golinks = data;
     	}).
@@ -12,7 +12,7 @@ app.controller('HomeController', function($scope, $http) {
   function searchGoPost(searchTerm){
     if(searchTerm.indexOf('#')!=-1){
       console.log('searching for the post');
-        $http.get(ROOT_URL + '/api/get_link_post?search_term='+encodeURIComponent(searchTerm)+'&token='+getToken()).
+        $http.get(tokenizedURL(ROOT_URL + '/api/get_link_post?search_term='+encodeURIComponent(searchTerm))).
           success(function(data, status, headers, config){
             if(data.content != null && data.content != ''){
               $('#search-post-div').html(data.content);
@@ -27,7 +27,7 @@ app.controller('HomeController', function($scope, $http) {
 	function searchGoLinks(searchTerm, page){
     $scope.searchPost = false;
     $('#search-post-div').html('');
-		$http.get(ROOT_URL + '/api/search_golinks?search_term='+encodeURIComponent(searchTerm)+'&page=1&token='+getToken()).
+		$http.get(tokenizedURL(ROOT_URL + '/api/search_golinks?search_term='+encodeURIComponent(searchTerm))).
     	success(function(data, status, headers, config){
     		$scope.golinks = data;
         $scope.searching = true;
@@ -40,7 +40,7 @@ app.controller('HomeController', function($scope, $http) {
     searchGoPost(searchTerm);
 	}
     function getPopularLinks(){
-      $http.get(ROOT_URL + '/api/popular_golinks?token='+getToken()).
+      $http.get(tokenizedURL(ROOT_URL + '/api/popular_golinks')).
       success(function(data, status, headers, config){
         $scope.popularLinks = data;
       }).
@@ -50,7 +50,7 @@ app.controller('HomeController', function($scope, $http) {
 
     }
     function getTopRecent(){
-      $http.get(ROOT_URL + '/api/top_recent?token='+getToken()).
+      $http.get(tokenizedURL(ROOT_URL + '/api/top_recent')).
       success(function(data, status, headers, config){
         $scope.topRecent = data;
       }).
@@ -76,16 +76,6 @@ app.controller('HomeController', function($scope, $http) {
     	$scope.page == 1;
     	searchGoLinks($('#search-input').val(), 1);
     };
-    $scope.getClicks = function(){
-      $http.get(ROOT_URL + '/api/recent_clicks'). //?search_term='+searchTerm+'&page=1&token='+getToken()).
-      success(function(data, status, headers, config){
-        $scope.golinks = data;
-      }).
-      error(function(data, status, headers, config){
-        console.log('there was an error');
-        console.log(data);
-      });
-    }
     $scope.searchTag = function(tag){
       searchGoLinks('#'+tag);
       $('#search-input').val('#'+tag);
@@ -126,7 +116,7 @@ app.controller('HomeController', function($scope, $http) {
       golink.tags = tags;
       // save the link server side
       $.ajax({
-        url: ROOT_URL+'/api/save_golink',
+        url: tokenizedURL(ROOT_URL+'/api/save_golink'),
         type: 'POST',
         data: {'id': id, 'key':key, 
               'description': description, 
@@ -148,7 +138,7 @@ app.controller('HomeController', function($scope, $http) {
         id = golink.id;
         $('#'+id+'-div').remove();
         $.ajax({
-        url: ROOT_URL+'/api/delete_golink',
+        url: tokenizedURL(ROOT_URL+'/api/delete_golink'),
         type: 'POST',
         data: {'id': id},
         success:function(data){

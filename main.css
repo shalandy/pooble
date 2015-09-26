@@ -1,0 +1,47 @@
+.largetext{
+	font-size:18px;
+}
+.url{
+   	color:green;
+   }
+   .middle{
+    margin-left:25%;
+    width:50%;
+   }
+   body{
+    padding-left:50px;
+    padding-right:50px;
+    font-family: 'Roboto', sans-serif;
+   }
+   .content-container{
+    margin-top:10px;
+   }
+   #top-div{
+    text-align: center;
+    width: 100%;
+    padding:25px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+   }
+   #token-input{
+    width:200px;
+   }
+   .profile-img{
+    height:20px;
+   }
+   .centered{
+    text-align: center;
+   }
+   .card{
+    border:1px solid rgba(0,0,0,0.1);
+    padding:15px;
+    padding-left:25px;
+    padding-right:25px;
+    margin:15px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.1);
+   }
+   .pushdown{
+      margin-top:50px;
+   }
+   .spaced{
+    margin-top:5px;
+   }

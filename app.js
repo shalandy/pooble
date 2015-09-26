@@ -1,10 +1,9 @@
 ROOT_URL = 'http://testing.berkeley-pbl.com';
 // ROOT_URL = 'http://localhost:3000'
-// var token = '';
+
 var token = getParameterByName('token');
-console.log(token);
-console.log('that was the token');
 var email = 'davidbliu@gmail.com';
+console.log(token);
 var app = angular.module('goApp', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
@@ -35,11 +34,24 @@ app.config(function($routeProvider) {
             templateUrl : 'views/settings.html',
             controller  : 'SettingsController'
         })
+        .when('/tags', {
+            templateUrl : 'views/tags.html',
+            controller  : 'TagsController'
+        })
         .otherwise({
           'redirect_to': '/'
         });
 });
 
+function tokenizedURL(url){
+    if(url.indexOf('?') != -1){
+        tokenized = url + '&token='+token;
+    }
+    else{
+        tokenized =  url + '?token='+token;
+    }
+    return tokenized;
+}
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

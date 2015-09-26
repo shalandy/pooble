@@ -1,6 +1,6 @@
 app.controller('ShareController', function($scope, $http){
 	function getMembers(){
-		 $http.get(ROOT_URL + '/api/current_members').
+		 $http.get( tokenizedURL(ROOT_URL + '/api/current_members')).
 		  success(function(data, status, headers, config){
 		    $scope.members = data;
 		  }).
@@ -33,7 +33,7 @@ app.controller('ShareController', function($scope, $http){
     	links = $scope.links;
     	$scope.pushMessage = 'pushing out notification...';
     	$.ajax({
-        url: ROOT_URL+'/api/send_push',
+        url: tokenizedURL(ROOT_URL+'/api/send_push'),
         type: 'POST',
         data: {'recipients': recipientEmails, 'message':message, 
               'links': links, 

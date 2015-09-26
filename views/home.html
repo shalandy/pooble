@@ -65,6 +65,7 @@
   margin-bottom:2px;
 }
 </style>
+
 <div id = 'homepage-container' class = 'centered row'>
   <h1>PooBLe</h1>
   	<div id = 'search-input-div'><input id = 'search-input' class = 'form-control' type = 'text' placeholder = 'Search PBL Links' ng-keyup="$event.keyCode == 13 && searchGoLinks()"></input>
@@ -88,7 +89,7 @@
                 <div><a class = 'blue' href = '{{golink.url}}'>{{golink.key}}</a></div>
                 <div class = 'green'>{{golink.url | limitTo:70}}</div>
                 <div class = ''>{{golink.description}}</div>
-                <div class = 'text-muted'>Added by: <a href = 'javascript:void(0)' class= 'member-link'>{{golink.member_email}}</a>, Permissions: <span class = 'permissions-span'>{{golink.permissions}}</span>, {{golink.num_clicks}} clicks
+                <div class = 'text-muted'>{{golink.time}} - Added by: <a href = 'javascript:void(0)' class= 'member-link'>{{golink.member_email}}</a>, Permissions: <span class = 'permissions-span'>{{golink.permissions}}</span>, {{golink.num_clicks}} clicks
                 </div>
                 <div>
                   tags: <a href = 'javascript:void(0)' class = 'tag-label' ng-repeat = 'tag in golink.tags' ng-click = 'searchTag(tag)'>{{tag}}</a>

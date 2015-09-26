@@ -1,6 +1,6 @@
 app.controller('InsightsController', function($scope, $http){
 	$scope.getClicks = function(searchTerm){
-		$http.get(ROOT_URL + '/api/golink_clicks?key='+encodeURIComponent(searchTerm)+'&token='+getToken()).
+		$http.get(tokenizedURL(ROOT_URL + '/api/golink_clicks?key='+encodeURIComponent(searchTerm))).
           success(function(data, status, headers, config){
           	$scope.clicks = data;
           	agData = aggregateClicks(data);

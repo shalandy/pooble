@@ -4,7 +4,7 @@ app.controller('AddController', function($scope){
     url = $scope.goURL;
     //ajax request to save the golink
     $.ajax({
-        url: ROOT_URL+'/api/add_golink',
+        url: tokenizedURL(ROOT_URL+'/api/add_golink'),
         type: 'POST',
         data: {'key': key, 'url':url, 'email': email},
         success:function(data){

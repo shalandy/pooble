@@ -1,6 +1,6 @@
 app.controller('UsersController', function($scope, $http){
   function getMembers(){
-     $http.get(ROOT_URL + '/api/current_members').
+     $http.get( tokenizedURL(ROOT_URL + '/api/current_members')).
       success(function(data, status, headers, config){
         $scope.members = data;
       }).
@@ -9,7 +9,7 @@ app.controller('UsersController', function($scope, $http){
       });
   }
   function getContributors(){
-     $http.get(ROOT_URL + '/api/contributors').
+     $http.get( tokenizedURL(ROOT_URL + '/api/contributors')).
       success(function(data, status, headers, config){
         $scope.contributors = data;
       }).
@@ -18,7 +18,7 @@ app.controller('UsersController', function($scope, $http){
       });
   }
   function getContributions(email){
-    $http.get(ROOT_URL + '/api/contributions?email='+encodeURIComponent(email)+'&token='+getToken()).
+    $http.get( tokenizedURL(ROOT_URL + '/api/contributions?email='+encodeURIComponent(email))).
       success(function(data, status, headers, config){
         $scope.contributions = data;
       }).
@@ -27,7 +27,7 @@ app.controller('UsersController', function($scope, $http){
       });
   }
   function getUserClicks(email){
-    $http.get(ROOT_URL + '/api/user_clicks?email='+email).
+    $http.get( tokenizedURL(ROOT_URL + '/api/user_clicks?email='+email)).
       success(function(data, status, headers, config){
         $scope.userClicks = data;
       }).
