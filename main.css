@@ -115,3 +115,7 @@
 .input-group{
   margin-bottom:2px;
 }
+
+#editing-buttons{
+  display:none;
+}
