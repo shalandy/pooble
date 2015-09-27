@@ -1,4 +1,4 @@
-app.controller('PageController', function($scope, $http) {
+app.controller('PageController', function($scope, $http, $routeParams) {
     
     function searchGoPost(searchTerm){
         if(searchTerm.indexOf('#')!=-1){
@@ -35,6 +35,6 @@ app.controller('PageController', function($scope, $http) {
         searchGoPost(searchTerm);
     }
     
-    searchGoLinks('#wdparty1',1);
-    searchGoPost('#wdparty1');
+    searchGoLinks("#" + $routeParams.tag, 1);
+    searchGoPost("#" + $routeParams.tag);
 });

@@ -47,7 +47,7 @@ app.config(function($routeProvider) {
             templateUrl : 'views/tags.html',
             controller  : 'TagsController'
         })
-        .when('/page', {
+        .when('/page/:tag', {
             templateUrl : 'views/page.html',
             controller : 'PageController'
         })
