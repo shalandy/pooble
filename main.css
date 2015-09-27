@@ -51,6 +51,9 @@
    .golink-td{
   width:25%;
 }
+.bottom-10{
+  margin-bottom:10px;
+}
 .permissions-span{
   text-decoration: underline;
 }
