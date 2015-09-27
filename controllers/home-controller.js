@@ -86,21 +86,6 @@ app.controller('HomeController', function($scope, $http) {
     $scope.getImageSrc = function(type){
         return './images/box-icon.png';
     };
-    $scope.image_hash = {}
-      $scope.image_hash['document'] = 'docs-icon.png'
-      $scope.image_hash['spreadsheets'] = 'sheets-icon.png'
-      $scope.image_hash['facebook'] = 'facebook-icon.png'
-      $scope.image_hash['trello'] = 'trello-logo.png'
-      $scope.image_hash['youtube'] = 'youtube-icon.png'
-      $scope.image_hash['box'] = 'box-icon.png'
-      $scope.image_hash['piazza'] = 'piazza-icon.png'
-      $scope.image_hash['flickr'] = 'flickr-logo.png'
-      $scope.image_hash['git'] = 'git-icon.png'
-      $scope.image_hash['other'] = 'pbl-logo.png'
-      $scope.image_hash['drive'] = 'drive-icon.png'
-      $scope.image_hash['instagram'] = 'instagram-logo.png'
-      $scope.image_hash['presentation'] = 'sheets-icon.png'
-      $scope.image_hash['form'] = 'forms-icon.png'
     $scope.saveGoLink = function(golink){
       id = golink.id;
       console.log('id was '+id);

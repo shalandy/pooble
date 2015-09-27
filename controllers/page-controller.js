@@ -1,14 +1,10 @@
-app.controller('PageController', function($scope, $http) {
+app.controller('PageController', function($scope, $http, $routeParams) {
     
     function searchGoPost(searchTerm){
         if(searchTerm.indexOf('#')!=-1){
           console.log('searching for the post');
             $http.get(tokenizedURL(ROOT_URL + '/api/get_link_post?search_term='+encodeURIComponent(searchTerm))).
               success(function(data, status, headers, config){
-//                if(data.content != null && data.content != ''){
-//                  $('#search-post-div').html(data.content);
-//                  $scope.searchPost = true;
-//                }
                 $scope.post = data;
                 $scope.searchPost = true;
               }).
@@ -19,7 +15,6 @@ app.controller('PageController', function($scope, $http) {
     }
     
     function searchGoLinks(searchTerm, page){
-        $scope.title = searchTerm;
         $scope.searchPost = false;
         $('#search-post-div').html('');
             $http.get(tokenizedURL(ROOT_URL + '/api/search_golinks?search_term='+encodeURIComponent(searchTerm))).
@@ -35,6 +30,12 @@ app.controller('PageController', function($scope, $http) {
         searchGoPost(searchTerm);
     }
     
-    searchGoLinks('#wdparty1',1);
-    searchGoPost('#wdparty1');
+    searchTerm = '#' + $routeParams.tag;
+    $scope.title = searchTerm
+    searchGoLinks(searchTerm,1);
+    searchGoPost(searchTerm);
+    $scope.scrollToLinks = function(){
+        linksPos = $('#links').position();
+        window.scrollTo(linksPos.left, linksPos.top);
+    }
 });

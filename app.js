@@ -47,7 +47,7 @@ app.config(function($routeProvider) {
             templateUrl : 'views/tags.html',
             controller  : 'TagsController'
         })
-        .when('/page', {
+        .when('/page/:tag', {
             templateUrl : 'views/page.html',
             controller : 'PageController'
         })
@@ -65,7 +65,27 @@ function tokenizedURL(url){
     }
     return tokenized;
 }
-
+app.run(function($rootScope) {
+    $rootScope.image_hash = {};
+    $rootScope.image_hash['document'] = 'docs-icon.png'
+    $rootScope.image_hash['spreadsheets'] = 'sheets-icon.png'
+    $rootScope.image_hash['facebook'] = 'facebook-icon.png'
+    $rootScope.image_hash['trello'] = 'trello-logo.png'
+    $rootScope.image_hash['youtube'] = 'youtube-icon.png'
+    $rootScope.image_hash['box'] = 'box-icon.png'
+    $rootScope.image_hash['piazza'] = 'piazza-icon.png'
+    $rootScope.image_hash['flickr'] = 'flickr-logo.png'
+    $rootScope.image_hash['git'] = 'git-icon.png'
+    $rootScope.image_hash['other'] = 'pbl-logo.png'
+    $rootScope.image_hash['drive'] = 'drive-icon.png'
+    $rootScope.image_hash['instagram'] = 'instagram-logo.png'
+    $rootScope.image_hash['presentation'] = 'sheets-icon.png'
+    $rootScope.image_hash['form'] = 'forms-icon.png'
+    $rootScope.getPageURL = function(tag){
+        tag = tag.substring(1, tag.length);
+        return '#/page/'+tag;
+    }
+})
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),

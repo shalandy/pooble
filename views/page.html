@@ -1,15 +1,18 @@
+
 <div class="row">
     <div class="col-md-3 pushdown">
-        <h2 class="text-center">Short Links</h2>
+        <h2 class="text-center">Links</h2>
         <div class="card">
-            <div ng-repeat='golink in golinks'>
-            <div><a href="{{golink.url}}">{{golink.key}}</a></div>
-        </div>
+            <div ng-repeat='golink in golinks | orderBy:"-num_clicks"'>
+              <div>{{golink.num_clicks}}: <a href="{{golink.url}}">{{golink.key}}</a></div>
+            </div>
+
+            <div class = 'pushdown-10'><a href = 'javascript:void(0)' ng-click = 'scrollToLinks()'>Scroll to links</a></div>
         </div>
     </div>
     <div class="col-md-6">
         <h2 class="text-center">{{title}}</h2>
-        <div class = 'card' ng-show = 'searchPost' ng-bind-html="post.content | to_trusted"></div>
+        <div class = 'card post-card' ng-show = 'searchPost' ng-bind-html="post.content | to_trusted"></div>
     </div>
     <div class="col-md-3 pushdown">
         <h2 class="text-center">Edit</h2>
@@ -18,7 +21,8 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" id = 'links'>
+    <div class = 'col-md-3'></div>
     <div class = 'col-md-6'>
       <div ng-show = 'golinks == null'><h2>Pulling data...</h2></div>
       <div class = 'golinks-container'>
@@ -26,7 +30,7 @@
           <div id = '{{golink.id}}-div'>
           <div class = 'show-content' ng-hide = 'editing'>
             <div>
-              <div class = 'pull-right'><img class = 'type-image' ng-src = './images/{{ image_hash[golink.type] }}' height=35/></div>
+              <div class = 'pull-right'><img class = 'type-image' ng-src = './images/{{ image_hash[golink.type] }}'/></div>
               <div class = 'left-content'>
                 <div><a class = 'blue' href = '{{golink.url}}'>{{golink.key}}</a></div>
                 <div class = 'green'>{{golink.url | limitTo:70}}</div>
@@ -82,5 +86,7 @@
           <!-- end of golink -->
         </div>
         <!-- end of golinks container -->
+      </div>
+      <div class = 'col-md-3'></div>
     </div>
 </div>

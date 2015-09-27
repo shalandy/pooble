@@ -17,12 +17,18 @@
 	width:50%;
 	float:left;
 }
+.page-listing{
+	font-size:18px;
+}
 </style>
 
 <div class = 'pushdown'>
 <h1 >Pages</h1>
 
-<div id = 'posts-container' class = 'row'>
+<div ng-repeat = 'page in pages'>
+	<div class = 'page-listing'><a href = '{{getPageURL(page.page)}}'>{{page.page}}</a></div>
+</div>
+<!-- <div id = 'posts-container' class = 'row'>
 
 	
 	<input id = 'post-search-input' type = 'text' class = 'form-control' placeholder = 'Search posts' ng-model = 'searchTerm'></input>
@@ -47,6 +53,6 @@
 		</div>
 	</div>
 </div>
-</div>
+</div> -->
 
 
