@@ -26,6 +26,24 @@ app.controller('PageController', function($scope, $http, $routeParams) {
                 console.log('there was an error searching golinks');
             });
     }
+    $scope.deletePost = function(){
+        title = $scope.postTitle;
+        tag = $scope.tag;
+        console.log(title);
+        console.log(tag);
+        $.ajax({
+        url: tokenizedURL(ROOT_URL+'/api/delete_page_post'),
+        type: 'POST',
+        data: {'title': title, 'tag':$scope.searchTerm
+        },
+        success:function(data){
+          window.location.reload();
+        },
+        error:function (xhr, textStatus, thrownError){
+          console.log('failed');
+        }
+      });
+    };
     $scope.createPost = function(){
         content = '';
         $scope.editMessage = 'Create a post';
@@ -37,11 +55,13 @@ app.controller('PageController', function($scope, $http, $routeParams) {
         console.log('lskfjlskdjfjlj');
         $scope.editingPost = false;
         $('#editing-buttons').hide();
+        $('#title-input').show();
     };
     $scope.editPost = function(post){
         $scope.editMessage = 'Edit this post';
         content = post.content;
         $scope.postTitle = post.title;
+        $('#title-input').hide();
         tinyMCE.activeEditor.setContent(content);
         $scope.editingPost = true;
         $('#editing-buttons').show();
@@ -72,6 +92,7 @@ app.controller('PageController', function($scope, $http, $routeParams) {
     searchTerm = '#' + $routeParams.tag;
     $scope.title = searchTerm
     $scope.searchTerm = searchTerm;
+    $scope.tag = searchTerm;
     searchGoLinks(searchTerm,1);
     getPosts(searchTerm);
     $scope.scrollToLinks = function(){
