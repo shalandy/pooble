@@ -1,0 +1,52 @@
+
+<style type = 'text/css'>
+#post-search-input{
+	width:50%;
+}
+#create-post-btn{
+	margin:15px;
+}
+.btn-default{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.input-group{
+	margin-bottom:10px;
+}
+.page-card{
+	width:50%;
+	float:left;
+}
+</style>
+
+<div class = 'pushdown'>
+<h1 >Pages</h1>
+
+<div id = 'posts-container' class = 'row'>
+
+	
+	<input id = 'post-search-input' type = 'text' class = 'form-control' placeholder = 'Search posts' ng-model = 'searchTerm'></input>
+
+	<button class = 'btn btn-default' ng-click='editing=true' ng-hide = 'editing==true'>New Post</button>
+	<button class = 'btn btn-default' ng-click='editing=false' ng-show = 'editing==true'>Cancel</button>
+	<div class = 'create-post-div' ng-show='editing==true'>
+		<div class="input-group">
+          <span class="input-group-addon" id="title-addon">Title</span>
+          <input id = 'post-title-input' type="text" class="form-control" placeholder="Blogpost title" aria-describedby="title-addon" ng-model = 'postTitle'>
+        </div>
+		<textarea id = 'post-content-input'></textarea>
+		<button id = 'save-post-btn' class = 'btn btn-default'>Save Post</div>
+	</div>
+
+
+	<div class = 'card page-card' ng-repeat = 'page in pages | filter:searchTerm'>
+		<h1>{{page.page}}</h1>
+		<div ng-repeat = 'post in page.posts'>
+			<h3>{{post.title}}</h3>
+			<div class = 'content-div card' ng-bind-html="post.content | to_trusted"></div>
+		</div>
+	</div>
+</div>
+</div>
+
+

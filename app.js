@@ -5,6 +5,11 @@ var token = getParameterByName('token');
 var email = 'davidbliu@gmail.com';
 console.log(token);
 var app = angular.module('goApp', ['ngRoute']);
+app.filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
@@ -21,6 +26,10 @@ app.config(function($routeProvider) {
         .when('/add', {
             templateUrl : 'views/add.html',
             controller  : 'AddController'
+        })
+        .when('/pages', {
+            templateUrl : 'views/pages.html',
+            controller  : 'PagesController'
         })
         .when('/share', {
             templateUrl : 'views/share.html',
