@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-md-3 pushdown">
+        <h2 class="text-center">Short Links</h2>
+        <div class="card">
+            <div ng-repeat='golink in golinks'>
+            <div><a href="{{golink.url}}">{{golink.key}}</a></div>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2 class="text-center">{{title}}</h2>
+        <div class = 'card' ng-show = 'searchPost' ng-bind-html="post.content | to_trusted"></div>
+    </div>
+    <div class="col-md-3 pushdown">
+        <h2 class="text-center">Edit</h2>
+        <div class="card">
+            <button class="btn btn-default">Add Post</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class = 'col-md-6'>
+      <div ng-show = 'golinks == null'><h2>Pulling data...</h2></div>
+      <div class = 'golinks-container'>
+    		<div ng-repeat='golink in golinks' class = 'golink-div' >
+          <div id = '{{golink.id}}-div'>
+          <div class = 'show-content' ng-hide = 'editing'>
+            <div>
+              <div class = 'pull-right'><img class = 'type-image' ng-src = './images/{{ image_hash[golink.type] }}' height=35/></div>
+              <div class = 'left-content'>
+                <div><a class = 'blue' href = '{{golink.url}}'>{{golink.key}}</a></div>
+                <div class = 'green'>{{golink.url | limitTo:70}}</div>
+                <div class = ''>{{golink.description}}</div>
+                <div class = 'text-muted'>{{golink.time}} - Added by: <a href = 'javascript:void(0)' class= 'member-link'>{{golink.member_email}}</a>, Permissions: <span class = 'permissions-span'>{{golink.permissions}}</span>, {{golink.num_clicks}} clicks
+                </div>
+                <div>
+                  tags: <a href = 'javascript:void(0)' class = 'tag-label' ng-repeat = 'tag in golink.tags' ng-click = 'searchTag(tag)'>{{tag}}</a>
+                </div>
+                <div><a href = 'javascript:void(0)' ng-click='editing = true'>Edit</a></div>
+              </div>
+            </div>
+          </div>
+          <!-- end of show content -->
+
+          <div ng-show='editing' class = 'editing-content'>
+            <div class="input-group">
+              <span class="input-group-addon" id="key-addon-{{golink.id}}">Key</span>
+              <input id = '{{golink.id}}-key-input' type="text" class="form-control" placeholder="Key" aria-describedby="key-addon-{{golink.id}}" value = '{{golink.key}}'>
+            </div>
+
+            <div class="input-group">
+              <span class="input-group-addon" id="key-addon-{{golink.id}}">URL</span>
+              <input id = '{{golink.id}}-url-input' type="text" class="form-control" placeholder="URL" aria-describedby="key-addon-{{golink.id}}" value = '{{golink.url}}'>
+            </div>
+
+            <div class="input-group">
+              <span class="input-group-addon" id="key-addon-{{golink.id}}">Description</span>
+              <input id = '{{golink.id}}-description-input' type="text" class="form-control" placeholder="Description" aria-describedby="key-addon-{{golink.id}}" value = '{{golink.description}}'>
+            </div>
+
+            <div class="input-group">
+              <span class="input-group-addon" id="key-addon-{{golink.id}}">Tags</span>
+              <input id = '{{golink.id}}-tags-input' type="text" class="form-control" placeholder="Tags (comma,separated)" aria-describedby="key-addon-{{golink.id}}" value = '{{golink.tags.join(",")}}'>
+            </div>
+
+            <div class = 'input-group'>
+              <span class = 'input-group-addon' id = 'key-addon-{{golink.id}}'>Permissions</span>
+              <select  id = '{{ golink.id }}-permissions-input' class = 'form-control permissions-input' aria-describedby="key-addon-{{golink.id}}">
+                <option ng-repeat = 'option in permissionsOptions' ng-selected="option == golink.permissions">{{option}}</option>
+              </select>
+              
+            
+          </div>
+            
+            <div><a href = 'javascript:void(0);' ng-click= 'saveGoLink(golink); editing=false'>Save</a> | <a href = 'javascript:void(0);' ng-click='editing = false'>Cancel</a> | <a href = 'javascript:void(0)' ng-click='deleteGoLink(golink)'>Delete</a>
+            </div>
+          </div>
+          <!-- end of editing -->
+          </div>
+          <!-- end of id div -->
+          </div>
+          <!-- end of golink -->
+        </div>
+        <!-- end of golinks container -->
+    </div>
+</div>
