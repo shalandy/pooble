@@ -31,18 +31,21 @@ app.controller('PageController', function($scope, $http, $routeParams) {
         tag = $scope.tag;
         console.log(title);
         console.log(tag);
-        $.ajax({
-        url: tokenizedURL(ROOT_URL+'/api/delete_page_post'),
-        type: 'POST',
-        data: {'title': title, 'tag':$scope.searchTerm
-        },
-        success:function(data){
-          window.location.reload();
-        },
-        error:function (xhr, textStatus, thrownError){
-          console.log('failed');
+        var r = confirm("Are you sure you want to delete this post?");
+        if (r == true) {
+            $.ajax({
+            url: tokenizedURL(ROOT_URL+'/api/delete_page_post'),
+            type: 'POST',
+            data: {'title': title, 'tag':$scope.searchTerm
+            },
+            success:function(data){
+              window.location.reload();
+            },
+            error:function (xhr, textStatus, thrownError){
+              console.log('failed');
+            }
+          });
         }
-      });
     };
     $scope.createPost = function(){
         content = '';
@@ -60,7 +63,8 @@ app.controller('PageController', function($scope, $http, $routeParams) {
     $scope.editPost = function(post){
         $scope.editMessage = 'Edit this post';
         content = post.content;
-        $scope.postTitle = post.title;
+        // $scope.postTitle = post.title;
+        $scope.postID = post.id;
         $('#title-input').hide();
         tinyMCE.activeEditor.setContent(content);
         $scope.editingPost = true;
@@ -68,14 +72,15 @@ app.controller('PageController', function($scope, $http, $routeParams) {
     };
     $scope.savePost = function(){
         content = tinyMCE.activeEditor.getContent();
-        title = $scope.postTitle;
+        // title = $scope.postTitle;
+        id = $scope.postID;
         console.log(content);
         console.log(title);
         console.log($scope.searchTerm);
         $.ajax({
         url: tokenizedURL(ROOT_URL+'/api/save_page_post'),
         type: 'POST',
-        data: {'title': title, 'tag':$scope.searchTerm, 
+        data: {'id': id, 'tag':$scope.searchTerm, 
               'content': content
         },
         success:function(data){

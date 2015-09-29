@@ -23,11 +23,7 @@
           <textarea></textarea>
         </div>
 
-        <div id = 'editing-buttons'>
-          <button class = 'btn btn-default' ng-click = 'savePost()'>Save</button>
-          <button class = 'btn btn-default' ng-click = 'cancelEditing()'>Cancel</button>
-          <button class = 'btn btn-default' ng-click = 'deletePost()'>Delete</button>
-        </div>
+
 
         <div id = 'show-post-container' ng-hide = 'editingPost == true'>
           <div ng-repeat = 'post in posts'>
@@ -45,12 +41,16 @@
             <button class="btn btn-default bottom-10" ng-click = 'createPost()'>Add Post</button>
             <input type = 'text' class = 'form-control' placeholder = 'Search links to add'></input>
         </div>
+         <div id = 'editing-buttons' class = 'card'>
+          <div><button class = 'btn btn-default' ng-click = 'savePost()'>Save</button></div>
+          <div><button class = 'btn btn-default' ng-click = 'cancelEditing()'>Cancel</button></div>
+          <div><button class = 'btn btn-default' ng-click = 'deletePost()'>Delete</button></div>
+        </div>
     </div>
 </div>
 <div class="row" id = 'links'>
     <div class = 'col-md-3'></div>
     <div class = 'col-md-6'>
-      <div ng-show = 'golinks == null'><h2>Pulling data...</h2></div>
       <div class = 'golinks-container'>
     		<div ng-repeat='golink in golinks' class = 'golink-div' >
           <div id = '{{golink.id}}-div'>
