@@ -55,7 +55,6 @@ app.controller('PageController', function($scope, $http, $routeParams) {
         $('#editing-buttons').show();
     };
     $scope.cancelEditing = function(){
-        console.log('lskfjlskdjfjlj');
         $scope.editingPost = false;
         $('#editing-buttons').hide();
         $('#title-input').show();
@@ -63,8 +62,7 @@ app.controller('PageController', function($scope, $http, $routeParams) {
     $scope.editPost = function(post){
         $scope.editMessage = 'Edit this post';
         content = post.content;
-        // $scope.postTitle = post.title;
-        $scope.postID = post.id;
+        $scope.postTitle = post.title;
         $('#title-input').hide();
         tinyMCE.activeEditor.setContent(content);
         $scope.editingPost = true;
@@ -72,15 +70,14 @@ app.controller('PageController', function($scope, $http, $routeParams) {
     };
     $scope.savePost = function(){
         content = tinyMCE.activeEditor.getContent();
-        // title = $scope.postTitle;
-        id = $scope.postID;
+        title = $scope.postTitle;
         console.log(content);
         console.log(title);
         console.log($scope.searchTerm);
         $.ajax({
         url: tokenizedURL(ROOT_URL+'/api/save_page_post'),
         type: 'POST',
-        data: {'id': id, 'tag':$scope.searchTerm, 
+        data: {'title': title, 'tag':$scope.searchTerm, 
               'content': content
         },
         success:function(data){
