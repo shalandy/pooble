@@ -45,11 +45,11 @@
     <div class = 'col-md-3 pushdown'>
       <div class = 'card'>
         <h3>Trending</h3>
-        <div ng-repeat = 'data in trendingGolinks | orderBy:"-num_clicks" | limitTo:25'>{{data.num_clicks}}: <a href = 'http://testing.berkeley-pbl.com/redirect_id/{{data.golink.id}}'>{{data.golink.key}}</a></div>
+        <div ng-repeat = 'data in trendingGolinks | orderBy:"-num_clicks" | limitTo:25'>{{data.num_clicks}}: <a href = 'http://testing.berkeley-pbl.com/go/redirect_id/{{data.golink.id}}'>{{data.golink.key}}</a></div>
       </div>
       <div class = 'card'>
         <h3>Most Popular</h3>
-        <div ng-repeat = 'golink in popularGolinks | limitTo:15'>{{golink.num_clicks}}: <a href = 'http://testing.berkeley-pbl.com/redirect_id/{{golink.id}}'>{{golink.key}}</a></div>
+        <div ng-repeat = 'golink in popularGolinks | limitTo:15'>{{golink.num_clicks}}: <a href = 'http://testing.berkeley-pbl.com/go/redirect_id/{{golink.id}}'>{{golink.key}}</a></div>
       </div>
     </div>
   </div>
