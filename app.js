@@ -1,5 +1,5 @@
-// ROOT_URL = 'http://testing.berkeley-pbl.com';
-ROOT_URL = 'http://localhost:3000'
+ROOT_URL = 'http://testing.berkeley-pbl.com';
+// ROOT_URL = 'http://localhost:3000'
 
 var token = getParameterByName('token');
 var email = 'davidbliu@gmail.com';
@@ -13,8 +13,8 @@ app.filter('to_trusted', ['$sce', function($sce){
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl : 'views/home.html',
-            controller  : 'HomeController'
+            templateUrl : 'views/search.html',
+            controller  : 'SearchController'
         })
         .when('/users', {
             templateUrl : 'views/users.html',
@@ -50,6 +50,10 @@ app.config(function($routeProvider) {
         .when('/page/:tag', {
             templateUrl : 'views/page.html',
             controller : 'PageController'
+        })
+        .when('/search', {
+            templateUrl : 'views/search.html',
+            controller : 'SearchController'
         })
         .otherwise({
           'redirect_to': '/'
